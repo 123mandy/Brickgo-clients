@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = "http://localhost:8000/api/users"  // need to be updated by HEROKU URL
+const API_URL = "https://brickgo-server.herokuapp.com/api/users"  // need to be updated by HEROKU URL
 
 // Register user
 const register = async(userData) =>{

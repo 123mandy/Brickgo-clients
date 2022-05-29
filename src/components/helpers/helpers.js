@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://localhost:8000/api/products/';
+const baseURL = 'https://brickgo-server.herokuapp.com/api/products/';
 
 
 // Higher order function to define error handling just once
