@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Brickgo-clients/static/css/main.5bd5c5b6.css",
+    "main.js": "/Brickgo-clients/static/js/main.42f4fd3d.js",
+    "static/js/787.d276dffd.chunk.js": "/Brickgo-clients/static/js/787.d276dffd.chunk.js",
+    "index.html": "/Brickgo-clients/index.html",
+    "main.5bd5c5b6.css.map": "/Brickgo-clients/static/css/main.5bd5c5b6.css.map",
+    "main.42f4fd3d.js.map": "/Brickgo-clients/static/js/main.42f4fd3d.js.map",
+    "787.d276dffd.chunk.js.map": "/Brickgo-clients/static/js/787.d276dffd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5bd5c5b6.css",
+    "static/js/main.42f4fd3d.js"
+  ]
+}
