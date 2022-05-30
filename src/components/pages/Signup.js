@@ -37,7 +37,7 @@ function Signup(){
         }
 
         if(isSuccess || user){
-            navigate('/')
+            navigate('/lego/list')
         }
 
         dispatch(reset())

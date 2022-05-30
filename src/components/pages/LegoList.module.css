@@ -1,0 +1,54 @@
+.container{
+    width: 100%;
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+.flexbox{
+    width: 32%;
+    border-radius: 10px;
+    min-width: 300px;
+    margin-bottom: 30px;
+}
+
+.alignLeft{
+    text-align: center;
+}
+
+.img{
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    height: 330px;
+}
+
+.imgContainer{
+    border-radius: 10px 10px 0 0;
+    height: 350px;
+}
+
+.textContainer{
+    border-radius: 0 0 15px 15px; 
+    text-align: left;
+}
+
+.name{
+    margin-left: 10px;
+    font-size: 20px;  
+}
+
+.price{
+    margin-left: 10px;
+    font-size: 15px;  
+}
+
+.stock{
+    background-color: red;
+    margin-left: 10px;
+    color: white;
+    width: 150px;
+    text-align:center;
+    margin: 10px auto;
+}

@@ -45,7 +45,7 @@ function Login(){
             toast.error(message)
         }
         if(isSuccess || user){
-            navigate('/')
+            navigate('/lego/list')
         }
         dispatch(reset())
     },[user,isError,isSuccess,message, navigate, dispatch])

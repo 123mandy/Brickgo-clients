@@ -3,6 +3,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import { api} from '../helpers/helpers';
 import axios from "axios";
+import styles from "./LegoShow.module.css"
 
 function LegoShow(){
     const navigate = useNavigate()
@@ -50,14 +51,14 @@ function LegoShow(){
         if(user._id === product.user){
             return(
                 <div>
-                    <button>Edit</button>
-                    <button onClick={deleteProduct}>Delete</button>
+                    <button className={styles.button_54}>Edit</button>
+                    <button onClick={deleteProduct} className={styles.button_54}>Delete</button>
                 </div>
             )
         }else{
             return(
                 <div>
-                    <button onClick={addToCart}>Add to Cart</button>
+                    <button onClick={addToCart} className={styles.button_54}>Add to Cart</button>
                 </div>
             )
         }
@@ -70,15 +71,25 @@ function LegoShow(){
     },[])
 
     return(
-        <div>
+        <div className={styles.container}>
         {product === null ? (''):(
             <div>
-            {product.image === []? (''):(
-                <img src={product.image[0]} />
-            )}
-            <h2>Name:{product.name}</h2>
-            <h2>Price: {product.price}</h2>
-            <p>{product.description}</p>   
+                <div className={styles.divContainer}>
+                   <div className={styles.imgContainer}>
+                   {product.image === []? (
+                       <img src="https://www.nc-engineering.com/nccms/wp-content/uploads/2021/04/image-coming-soon-placeholder.png" className={styles.img}/>
+                   ):(
+                       <img src={product.image[0]} className={styles.img}/>
+                   )}
+                   </div>
+                   <div className={styles.textContainer}>
+                       <p className={styles.name}>{product.name}</p>
+                       <p className={styles.price}>${product.price}</p>
+                       <p className={styles.stock}>{product.qty} left in stock</p>
+                       <p className={styles.description}>{product.description}</p> 
+                   </div>
+                </div>
+              
             <AuthButton />
             </div>
         )}

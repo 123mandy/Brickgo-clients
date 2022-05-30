@@ -3,6 +3,7 @@ import {Link,useNavigate,useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import axios from "axios";
 import style from "./UserCart.module.css";
+import {FaBitbucket} from "react-icons/fa";
 
 
 function UserCart(){
@@ -64,6 +65,14 @@ function UserCart(){
         }
         console.log("click")
     }
+    
+    // remove product from cart
+    const baseURL_userCart = `http://localhost:8000/api/users/remove/${user._id}/`;
+    const removeCart = async(item)=>{
+        const res = await axios.put(baseURL_userCart + item.productId)
+        console.log("click");
+        fetchUser();
+    }
 
     
     // create shopping cart component
@@ -85,6 +94,8 @@ function UserCart(){
                                     <p className={style.numInput}>{item.qtyNeeded}</p>
                                     <button className={style.numButton} disabled={removeDisable} onClick={()=>removeNum(item)}>-</button>
                                     <p>$ {item.productPrice * item.qtyNeeded}</p>
+                                    <FaBitbucket onClick={()=>removeCart(item)} />
+
                                 </div>                         	
                             </div>
                         )
@@ -104,7 +115,12 @@ function UserCart(){
 
     useEffect(()=>{
         fetchUser();
-    },[sumPrice])
+    },[sumPrice]);
+
+    useEffect(()=>{
+        calPrice();
+    },[cartInfo]);
+
 
     return(
         <div>
