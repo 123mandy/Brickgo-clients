@@ -3,11 +3,12 @@
     display: inline-flex;
     flex-wrap: wrap;
     margin: 0 auto;
-    justify-content: space-between;
 }
 
 .flexbox{
     width: 30%;
+    margin-left: 1.5%;
+    margin-right: 1.5%;
     border-radius: 10px;
     min-width: 300px;
     margin-top:60px;

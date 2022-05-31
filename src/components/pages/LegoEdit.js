@@ -3,6 +3,7 @@ import {useParams, useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {useDropzone} from 'react-dropzone';
 import { api } from '../helpers/helpers';
+import axios from "axios";
 
 function LegoEdit(){
     const navigate = useNavigate()
@@ -95,6 +96,26 @@ function LegoEdit(){
         newFiles.splice(newFiles.indexOf(file), 1); // remove the file from the array
         setSelectedImages(newFiles);
     };
+    
+    const API_update = `https://brickgo-server.herokuapp.com/api/products/${params.id}`
+    const createOrUpdate = async()=>{
+        const res = await axios.put(API_update, {
+            name: updateName,
+            description: updateDescription,
+            image: updateImage,
+            price: updatePrice,
+            qty: updateQTY
+        })
+        
+            navigate(`/lego/${params.id}`)
+        
+    }
+
+    const onSubmit = (e) =>{
+        e.preventDefault();
+        createOrUpdate();
+    }
+
 
     if (product !== null) {
 		if (updateName == null) {
@@ -103,14 +124,14 @@ function LegoEdit(){
 		if (updateDescription == null) {
 			setDescription(`${product.description}`);
 		}
-		if (updateImage == null) {
-			setImage(`${product.image}`);
-		}
 		if (updateQTY == null) {
 			setQTY(`${product.qty}`);
 		}
 		if (updatePrice == null) {
 			setPrice(`${product.price}`);
+		}
+        if (selectedImages == []) {
+			setSelectedImages(`${product.image}`);
 		}
 	}
 
@@ -150,26 +171,6 @@ function LegoEdit(){
                             <p style={{lineHeight: "100px"}}>Drag 'n' drop some files here, or click to select files</p>
                         }
                    </div>
-                   <div style={{
-                       display:"inline-flex",
-                       justifyContent: "space-between",
-                   }}>
-                   {product.image.map((img)=>{
-								return <div style={{
-                                           width: "30%",
-                                           margin:"0 10px"
-                                       }}>
-								          <img src={img}
-                                          style={{
-                                            width: "150px",
-                                            height: "150px",
-                                            display: "block",
-                                            objectFit: "cover",
-                                          }} />
-								          <button  onClick={() => deleteImage(img)}>delete</button> 
-									   </div>	  
-							})}
-                    </div>
                    {selected_images}
                 </div>
                 <div className="form-group">
@@ -216,7 +217,7 @@ function LegoEdit(){
                     />
                 </div>
                 <div className="form-group">
-                    <button className="btn btn-block">Update your set</button>
+                    <button className="btn btn-block" onClick={onSubmit}>Update your set</button>
                 </div>
             </form>
             )}

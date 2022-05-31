@@ -93,6 +93,9 @@ function LegoNew(){
             qty: newQTY,
             user: user._id
         });
+        if(res){
+            navigate('/lego/list')
+        }
     }
 
     const onSubmit = (e) =>{

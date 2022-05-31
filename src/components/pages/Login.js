@@ -83,7 +83,7 @@ function Login(){
                     />
                 </div>
                 <div className="form-group">
-                    <button type="submit" className="btn btn-block">Log up</button>
+                    <button type="submit" className="btn btn-block">Log in</button>
                 </div>
             </form>
         </div>

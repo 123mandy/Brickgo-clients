@@ -20,7 +20,7 @@ function LegoList(){
     // Get data from database
     const getAll = async()=>{
         const response = await axios.get(API);
-        setLego(response.data)
+        setLego(response.data.reverse())
     }
 
 

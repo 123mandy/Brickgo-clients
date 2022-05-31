@@ -3,7 +3,7 @@ import React from "react";
 function Home(){
     return(
         <div style={{backgroundImage: "url('https://cdn.pixabay.com/photo/2018/10/26/08/26/lego-frame-3774083_1280.png')", height:"100vh", backgroundRepeat:"no-repeat" }}>
-            {/* <div style={{paddingTop: "200px"}}>
+            <div style={{paddingTop: "200px"}}>
                 <h1> 💘 Discover the lego world! 💘</h1>
                 <svg id="blocks" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                 <defs>
@@ -34,7 +34,7 @@ function Home(){
                 </g>
                 
                 <g id="yellow"><path id="body-4" data-name="body" d="M311.9 112V80h-32v32h-48V80h-32v32h-16v80h144v-80z" transform="translate(-31.9)" fill='#ffd257'/><path id="light-4" data-name="light" d="M183.8 112h128a64 64 0 01-64 64h-64v-64z" transform="translate(-31.9)" fill="#ffe8ae"/></g><g id="light-green"><path d="M383.9 32V0h-32v32h-48V0h-32v32h-16v80h224V32z" transform="translate(-31.9)" fill='#7dd491'/><path d="M463.9 32V0h-32v32" transform="translate(-31.9)" fill='#7dd491'/><path d="M255.9 32h208a64 64 0 01-64 64h-144V32z" transform="translate(-31.9)" fill="#c6ec6b"/></g></svg>
-            </div> */}
+            </div>
         </div>
     )
 }
