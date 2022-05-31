@@ -160,7 +160,6 @@ function UserCheckout(){
             </form>
             ):(
                 <div>
-                   <h2>Card Infomation:</h2>
                    <Elements stripe={stripePromise}>
                        <PaymentForm />
                    </Elements>

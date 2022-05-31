@@ -54,19 +54,27 @@ function LegoNew(){
     )
 
     const selected_images = selectedImages?.map((file) => (
-        <div>
-          <img
-            src={file.preview}
-            style={{
-              width: "100%",
-              height: "150px",
-              display: "block",
-              objectFit: "cover",
-            }}
-          />
-          <button onClick={() => deleteImage(file)}>
-            Delete
-          </button>
+        <div style={{
+            display:"inline-flex",
+            justifyContent: "space-between",
+        }}>
+          <div style={{
+              width: "30%",
+              margin:"0 10px"
+          }}>
+             <img
+               src={file.preview}
+               style={{
+                 width: "150px",
+                 height: "150px",
+                 display: "block",
+                 objectFit: "cover",
+               }}
+             />
+             <button onClick={() => deleteImage(file)}>
+               Delete
+             </button>
+          </div>
         </div>
     ));
 
@@ -107,7 +115,7 @@ function LegoNew(){
     },[user,navigate])
     return(
         <div>
-            <form className="form" onSubmit={onSubmit}>
+            <form className="form">
                 <div className="form-group">
                     <label>
                         Lego Set:
@@ -122,12 +130,12 @@ function LegoNew(){
                     />
                 </div>
                 <div className="form-group">
-                    <div {...getRootProps()}>
-                        <input {...getInputProps()} />
+                    <div {...getRootProps()} className="dropArea">
+                        <input {...getInputProps()}/>
                         {
                           isDragActive ?
-                            <p>Drop the files here ...</p> :
-                            <p>Drag 'n' drop some files here, or click to select files</p>
+                            <p style={{lineHeight: "100px"}}>Drop the files here ...</p> :
+                            <p style={{lineHeight: "100px"}}>Drag 'n' drop some files here, or click to select files</p>
                         }
                    </div>
                    {selected_images}
@@ -174,7 +182,7 @@ function LegoNew(){
                     />
                 </div>
                 <div className="form-group">
-                    <button type="submit" className="btn btn-block">Publish your set</button>
+                    <button onClick={onSubmit} className="btn btn-block">Publish your set</button>
                 </div>
             </form>
         </div>

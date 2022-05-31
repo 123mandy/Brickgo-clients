@@ -2,8 +2,14 @@ import React, {useEffect, useState} from "react";
 import {CardElement, useElements, useStripe} from "@stripe/react-stripe-js";
 import axios from "axios";
 import styles from "./PaymentForm.module.css";
+import confetti from "https://cdn.skypack.dev/canvas-confetti";
+import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
+
+
 
 function PaymentForm(){
+    const {user} = useSelector((state)=>state.auth);
     const [success,setSuccess]=useState(false);
     const stripe = useStripe();
     const elements = useElements();
@@ -59,24 +65,45 @@ function PaymentForm(){
         }
     }
 
+    if(success){
+        confetti();
+    }
+
+    
+
     useEffect(()=>{
 
     },[error])
 
     return(
         <div>
-            <form onSubmit={handleSubmit}>
-                <fieldset  className={styles.test}>
+            {!success ? (
+                <div>
+                    <h2>Card information:</h2>
+                    <p>Payment method</p>
                     <div>
-                        <CardElement className={styles.input} option={CARD_OPTIONS}/>
-                    </div>  
-                </fieldset>
-                {error ? (
-                    <p>{error.message}</p>
-                ):("") }
-                <ErrorMessage />
-                <button>Pay</button>
-            </form>
+                        <img src="https://www.theorchardcottage.co.nz/wp-content/uploads/2018/09/visa-and-mastercard-logos-logo-visa-png-logo-visa-mastercard-png-visa-logo-white-png-awesome-logos-768x229.png" className={styles.img}/>
+                        <img src="https://www.pngkit.com/png/full/53-530494_american-express-american-express-logo-black.png" className={styles.img2}/>
+                        <img src="https://kingdomanimalhospital.com/wp-content/uploads/2017/08/discover-card-logo.png" className={styles.img2}/>
+                    </div>
+                    <form onSubmit={handleSubmit}>
+                        <fieldset  className={styles.test}>
+                            <div>
+                                <CardElement className={styles.input} option={CARD_OPTIONS}/>
+                            </div>  
+                        </fieldset>
+                        <button className={styles.button_27}>Pay</button>
+                    </form>
+                </div>
+            ):(
+                <div className={styles.container}>
+                    <h2>Your order is on the way!</h2>
+                    <Link to={`/order/${user._id}`}>
+                        <button className={styles.button_27}> Check your order</button>
+                    </Link>
+                </div>
+            ) }
+            
         </div>
     )
 }

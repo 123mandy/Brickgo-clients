@@ -216,3 +216,54 @@ h3 {
   }
 }
 
+.dropArea{
+  border: 2px dashed rgb(207, 207, 207);
+  height: 100px;
+  margin-bottom: 30px;
+}
+
+#blocks {
+	width: 450px;
+}
+
+#red {
+	animation: descend 1s forwards;
+	opacity: 0;
+}
+
+#green {
+	animation: descend 1s .3s forwards;
+	opacity: 0;
+}
+
+#orange {
+	animation: descend 1s .5s forwards;
+	opacity: 0;
+}
+
+#blue {
+	animation: descend 1s .7s forwards;
+	opacity: 0;
+}
+
+#yellow{
+	animation: descend 1s .9s forwards;
+	opacity: 0;
+}
+
+#light-green {
+		animation: descend 1s 1s forwards;
+	opacity: 0;
+}
+
+@keyframes descend {
+	from {
+		opacity: 0;
+		transform: translateY(-1000px)
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0)
+	}
+}
+

@@ -15,8 +15,9 @@ function UserCart(){
     // Get current user's shopping cart information
     let params = useParams();
     const API_user = `https://brickgo-server.herokuapp.com/api/users/${params.userid}`
-    const [cartInfo, setCartInfo] = useState([]);
-    const [sumPrice, setSumPrice] = useState(null)
+    const [cartInfo, setCartInfo] = useState(null);
+    const [sumPrice, setSumPrice] = useState(null);
+    const [isLoading, setIsLoading] = useState(true)
 
     const fetchUser = async()=>{
         const res = await axios.get(API_user)
@@ -131,13 +132,76 @@ function UserCart(){
     },[sumPrice]);
 
     useEffect(()=>{
-        calPrice();
-    },[cartInfo]);
+        if(isLoading === false){
+           calPrice();
+        }
+    },[cartInfo, isLoading]);
+
+    useEffect(()=>{
+        if(cartInfo !== null ){
+          setIsLoading(false)
+        }
+    },[cartInfo])
 
 
     return(
         <div >
-            <ShoppingCart />        
+            {isLoading ? (
+                <div className={style.loading}>
+                    <img src="https://media.baamboozle.com/uploads/images/147872/1642758379_98425_gif-url.gif" className={style.loadingImg} />
+                </div>
+            ):(
+                <div>
+                    {cartInfo.length > 0 ? (
+                        <div>
+                            {cartInfo.map((item)=>{
+                                    return(
+                                        <div className="header" key={item.productId}>
+                                            <div className="logo">
+                                                <ul>
+                                                     {item.productImage === undefined? (
+                                                         <img className={style.img} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTUdxAYxFMMAG1YDKnIiCN94eZNUx0B3mrT8FVH-QCcry2avkL71uUGFBs_CvX45EKmPU&usqp=CAU"></img>
+                                                     ):(
+                                                         <img className={style.img} src={item.productImage}></img>
+                                                     )}
+                                                     <p className={style.name}>{item.productName}</p>
+                                                </ul>
+                                            </div>
+                                            <ul className={style.parent}>
+                                                <li>
+                                                   <p className={style.price}>$ {item.productPrice * item.qtyNeeded}</p>  
+                                                </li>
+                                                <button className={item.qtyNeeded < item.productQty ? style.numButton : style.numButtonDisabled} onClick={()=>AddNum(item)}>+</button>
+                                                <p className={style.numInput}>{item.qtyNeeded}</p>
+                                                <button className={item.qtyNeeded > 1 ? style.numButton : style.numButtonDisabled} onClick={()=>removeNum(item)}>-</button>
+                                                <li>
+                                                    <button  onClick={()=>removeCart(item)} className={style.remove}><FaBitbucket/> Remove</button>
+                                                </li>
+                                                {item.qtyNeeded === item.productQty ? (
+                                                <p className={style.warning}>Can't add more! Only {item.productQty} in stock</p>
+                                                ):("")} 
+                                            </ul>                             	
+                                        </div>
+                                    )
+                                })
+                            } 
+                                <div className={style.textalign_right}>
+                                     <p className={style.total}>Total: ${sumPrice}</p>
+                                     <Link to={`/checkout/${user._id}`}>
+                                         <button className={style.button_54}>Checkout</button>
+                                     </Link>
+                                </div>             
+                        </div>
+                    ):(
+                        <div>
+                            <h1> Your shopping cart is empty</h1>
+                            <Link to='/lego/list'>
+                                <button className={style.button_54}>Explore your interest</button>
+                            </Link>
+                        </div>
+                    )}
+                </div>
+            )}         
         </div>
     )
 }

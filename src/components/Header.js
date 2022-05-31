@@ -1,10 +1,10 @@
 import React from "react";
-import {FaSignInAlt, FaShoppingCart, FaUser} from "react-icons/fa";
+import {FaSignInAlt, FaShoppingCart, FaUser, FaAlignJustify} from "react-icons/fa";
 import {Link, useNavigate} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
 import {logout, reset} from "../features/auth/authSlice";
 import styles from "./Header.module.css";
-import { BsCardList } from "react-icons/bs";
+import { BsCardList,BsListStars,BsFillPlusCircleFill } from "react-icons/bs";
 import { isRejected } from "@reduxjs/toolkit";
 
 
@@ -50,8 +50,13 @@ function Header(){
                 ):(
                     <>
                         <li>
-                            <Link to={`/lego/${user._id}`}>
-                                <BsCardList /> My Lego
+                            <Link to='/lego/new'>
+                                <BsFillPlusCircleFill /> New Lego
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to={`/mylego/${user._id}`}>
+                                <BsListStars /> My Lego
                             </Link>
                         </li>
                         <li>
@@ -61,7 +66,7 @@ function Header(){
                         </li>
                         <li>
                             <Link to={`/cart/${user._id}`} >
-                                <FaShoppingCart /> Shopping Cart
+                                <FaShoppingCart />Cart
                             </Link>    
                         </li>
                         <li>
