@@ -28,7 +28,7 @@ function LegoShow(){
     }
 
     // Add product to shoppingcart
-    const baseURL_userCart = `http://localhost:8000/api/users/${user._id}`;
+    const baseURL_userCart = `https://brickgo-server.herokuapp.com/api/users/${user._id}`;
     const addToCart = async()=>{
         const res = await axios.put(baseURL_userCart, {
             $push:{

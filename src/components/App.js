@@ -13,6 +13,7 @@ import LegoShow from './pages/LegoShow';
 import LegoEdit from './pages/LegoEdit';
 import UserCart from "./pages/UserCart";
 import UserCheckout from "./pages/UserCheckout"
+import Order from "./pages/Order"
 
 
 
@@ -32,6 +33,7 @@ function App() {
               <Route path="/lego/edit/:id" element={<LegoEdit/>} />  
               <Route path="/cart/:userid" element={<UserCart/>} /> 
               <Route path="/checkout/:userid" element={<UserCheckout/>} />
+              <Route path="/order/:userid" element={<Order/>} />
            </Routes>
          </div>   
       </Router>

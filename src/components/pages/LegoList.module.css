@@ -7,14 +7,15 @@
 }
 
 .flexbox{
-    width: 32%;
+    width: 30%;
     border-radius: 10px;
     min-width: 300px;
-    margin-bottom: 30px;
+    margin-top:60px;
 }
 
 .alignLeft{
     text-align: center;
+    position: relative;
 }
 
 .img{
@@ -36,7 +37,7 @@
 
 .name{
     margin-left: 10px;
-    font-size: 20px;  
+    font-size: 15px;  
 }
 
 .price{
@@ -51,4 +52,11 @@
     width: 150px;
     text-align:center;
     margin: 10px auto;
+}
+
+.soldout{
+    position: absolute;
+    top:20px;
+    left: 10px;
+    width: 100%;
 }

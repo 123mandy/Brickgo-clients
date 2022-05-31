@@ -6,6 +6,7 @@ import style from "./UserCart.module.css";
 import {FaBitbucket} from "react-icons/fa";
 
 
+
 function UserCart(){
     const navigate = useNavigate()
     // User auth
@@ -13,7 +14,7 @@ function UserCart(){
  
     // Get current user's shopping cart information
     let params = useParams();
-    const API_user = `http://localhost:8000/api/users/${params.userid}`
+    const API_user = `https://brickgo-server.herokuapp.com/api/users/${params.userid}`
     const [cartInfo, setCartInfo] = useState([]);
     const [sumPrice, setSumPrice] = useState(null)
 
@@ -21,19 +22,16 @@ function UserCart(){
         const res = await axios.get(API_user)
         setCartInfo(res.data.cart);
         calPrice();
-        
     }
    
     //Add needed button function
-    let addDisable = false;
+
     const AddNum = async(item)=>{
         if((item.qtyNeeded + 1) <= item.productQty){
             const res = await axios.put(API_user+`/${item.productId}`,{
                 'cart.$.qtyNeeded': item.qtyNeeded+=1
             });
             fetchUser()
-        }else{
-           addDisable = true
         }
     }
 
@@ -44,8 +42,7 @@ function UserCart(){
         if(cartInfo.length >=1){
             for(let i=0; i<cartInfo.length; i++){
                sum += (cartInfo[i].productPrice *cartInfo[i].qtyNeeded);
-            }
-            
+            }  
         }  
         setSumPrice(sum);
        }
@@ -53,21 +50,18 @@ function UserCart(){
        
 
     //remove needed button function
-    let removeDisable = false;
+ 
     const removeNum = async(item)=>{
         if((item.qtyNeeded - 1) >= 1){
             const res = await axios.put(API_user+`/${item.productId}`,{
                 'cart.$.qtyNeeded': item.qtyNeeded-=1
             });
             fetchUser();
-        }else{
-           removeDisable = true
         }
-        console.log("click")
     }
     
     // remove product from cart
-    const baseURL_userCart = `http://localhost:8000/api/users/remove/${user._id}/`;
+    const baseURL_userCart = `https://brickgo-server.herokuapp.com/api/users/remove/${user._id}/`;
     const removeCart = async(item)=>{
         const res = await axios.put(baseURL_userCart + item.productId)
         console.log("click");
@@ -82,31 +76,50 @@ function UserCart(){
                 <div>
                     {cartInfo.map((item)=>{
                         return(
-                            <div className={style.item} key={item.productId}>
-                                {item.productImage === undefined? (
-                                    <img className={style.img} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTUdxAYxFMMAG1YDKnIiCN94eZNUx0B3mrT8FVH-QCcry2avkL71uUGFBs_CvX45EKmPU&usqp=CAU"></img>
-                                ):(
-                                    <img className={style.img} src={item.productImage}></img>
-                                )}
-                                <h2>Name: {item.productName}</h2>
-                                <div className={style.item}>
-                                    <button className={!addDisable ? style.numButton : style.numButtonDisabled} disabled={addDisable} onClick={()=>AddNum(item)}>+</button>
+                            <div className="header" key={item.productId}>
+                                <div className="logo">
+                                    <ul>
+                                         {item.productImage === undefined? (
+                                             <img className={style.img} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTUdxAYxFMMAG1YDKnIiCN94eZNUx0B3mrT8FVH-QCcry2avkL71uUGFBs_CvX45EKmPU&usqp=CAU"></img>
+                                         ):(
+                                             <img className={style.img} src={item.productImage}></img>
+                                         )}
+                                         <p className={style.name}>{item.productName}</p>
+                                    </ul>
+                                </div>
+                                <ul className={style.parent}>
+                                    <li>
+                                       <p className={style.price}>$ {item.productPrice * item.qtyNeeded}</p>  
+                                    </li>
+                                    <button className={item.qtyNeeded < item.productQty ? style.numButton : style.numButtonDisabled} onClick={()=>AddNum(item)}>+</button>
                                     <p className={style.numInput}>{item.qtyNeeded}</p>
-                                    <button className={style.numButton} disabled={removeDisable} onClick={()=>removeNum(item)}>-</button>
-                                    <p>$ {item.productPrice * item.qtyNeeded}</p>
-                                    <FaBitbucket onClick={()=>removeCart(item)} />
-
-                                </div>                         	
+                                    <button className={item.qtyNeeded > 1 ? style.numButton : style.numButtonDisabled} onClick={()=>removeNum(item)}>-</button>
+                                    <li>
+                                        <button  onClick={()=>removeCart(item)} className={style.remove}><FaBitbucket/> Remove</button>
+                                    </li>
+                                    {item.qtyNeeded === item.productQty ? (
+                                    <p className={style.warning}>Can't add more! Only {item.productQty} in stock</p>
+                                    ):("")} 
+                                </ul>                             	
                             </div>
                         )
                     })
-                }               
+                } 
+                    <div className={style.textalign_right}>
+                         <p className={style.total}>Total: ${sumPrice}</p>
+                         <Link to={`/checkout/${user._id}`}>
+                             <button className={style.button_54}>Checkout</button>
+                         </Link>
+                    </div>             
                 </div>
             )
         }else{
             return(
                 <div>
                     <h1> Your shopping cart is empty</h1>
+                    <Link to='/lego/list'>
+                        <button className={style.button_54}>Explore your interest</button>
+                    </Link>
                 </div>
             )
         }
@@ -123,12 +136,8 @@ function UserCart(){
 
 
     return(
-        <div>
-            <ShoppingCart />
-            <p>Total: ${sumPrice}</p>
-            <Link to={`/checkout/${user._id}`}>
-            <button >Checkout</button>
-            </Link>
+        <div >
+            <ShoppingCart />        
         </div>
     )
 }

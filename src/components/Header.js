@@ -3,6 +3,9 @@ import {FaSignInAlt, FaShoppingCart, FaUser} from "react-icons/fa";
 import {Link, useNavigate} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
 import {logout, reset} from "../features/auth/authSlice";
+import styles from "./Header.module.css";
+import { BsCardList } from "react-icons/bs";
+import { isRejected } from "@reduxjs/toolkit";
 
 
 function Header(){
@@ -18,8 +21,17 @@ function Header(){
 
     return(
         <div className="header">
+             
             <div className="logo">
-               <Link to="/">BrickGo</Link>
+                <ul>
+                    <li>
+                        <img src="https://media4.giphy.com/media/WsUFoCSxQVK2GJGorT/giphy.gif?cid=ecf05e47nqs1fj0c2yr4rf4fpk3v0j8l8wkpnto9wvij9583&rid=giphy.gif&ct=s" className={styles.logo}/>
+                    </li>
+                    <li>
+                        <Link to={user ? "/lego/list" : "/"} className={styles.name}>BrickGo</Link>
+                    </li>
+                </ul>
+              
             </div>
             <ul> 
                 {!user ? (
@@ -38,19 +50,23 @@ function Header(){
                 ):(
                     <>
                         <li>
-                            <Link to="/legolist">
-                                <FaSignInAlt /> Find your lego
+                            <Link to={`/lego/${user._id}`}>
+                                <BsCardList /> My Lego
                             </Link>
+                        </li>
+                        <li>
+                            <Link to={`/order/${user._id}`}>
+                                <BsCardList /> My Order
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to={`/cart/${user._id}`} >
+                                <FaShoppingCart /> Shopping Cart
+                            </Link>    
                         </li>
                         <li>
                             <button className="btn" onClick={onLogout}>Logout</button>
                         </li>
-                        <li>
-                            <Link to={`/cart/${user._id}`} >
-                                <FaShoppingCart />
-                            </Link>    
-                        </li>
-
                     </>
 
                 )}
