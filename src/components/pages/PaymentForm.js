@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import {CardElement, useElements, useStripe} from "@stripe/react-stripe-js";
 import axios from "axios";
 import styles from "./PaymentForm.module.css";
-import confetti from "https://cdn.skypack.dev/canvas-confetti";
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
 
@@ -65,9 +64,6 @@ function PaymentForm(){
         }
     }
 
-    if(success){
-        confetti();
-    }
 
     
 
