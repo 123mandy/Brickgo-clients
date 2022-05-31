@@ -3,7 +3,6 @@ import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {useDropzone} from 'react-dropzone';
 import { api } from '../helpers/helpers';
-import axios from "axios";
 
 function LegoNew(){
     const navigate = useNavigate();
@@ -85,22 +84,16 @@ function LegoNew(){
         setSelectedImages(newFiles);
     };
     
-    // const createOrUpdate = async()=>{
-    //     const res = await api.createProduct({
-    //         name: newName,
-    //         description: newDescription,
-    //         image: newImage,
-    //         price: newPrice,
-    //         qty: newQTY,
-    //         user: user._id
-    //     });
-    //     if(res.message){
-    //         this.message =res.errors;
-    //         alert(res.message);
-    //     }else{
-    //         alert("successful");
-    //     }  
-    // }
+    const createOrUpdate = async()=>{
+        const res = await api.createProduct({
+            name: newName,
+            description: newDescription,
+            image: newImage,
+            price: newPrice,
+            qty: newQTY,
+            user: user._id
+        });
+    }
 
     const onSubmit = (e) =>{
         e.preventDefault();
