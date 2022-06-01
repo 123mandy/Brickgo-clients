@@ -86,7 +86,12 @@ function LegoShow(){
         }else{
             return(
                 <div>
-                    <button onClick={addToCart} className={styles.button_54}>Add to Cart</button>
+                    {product.productQty > 0 ? (
+                        <button onClick={addToCart} className={styles.button_54}>Add to Cart</button>
+                    ): (
+                        ""
+                    )}
+                   
                 </div>
             )
         }
