@@ -6,6 +6,8 @@ A great e-commerce online platform for user to trade their extra lego set! </br>
 **_Backend: Node.js, Express.js and MongoDB_**
 **Other:Heroku, Cloudinary, Netlify, Stripe**
 
+Click here to play: https://brick-go.netlify.app/
+
 ```
 username: mandy@ga.co
 password: 123123
