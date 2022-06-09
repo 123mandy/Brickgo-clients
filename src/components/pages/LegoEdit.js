@@ -167,7 +167,7 @@ function LegoEdit(){
                         <input {...getInputProps()}/>
                         {
                           isDragActive ?
-                            <p style={{lineHeight: "100px"}}>Drop the files here ...</p> :
+                            <p style={{lineHeight: "100px"}}>Reselect the images here ...</p> :
                             <p style={{lineHeight: "100px"}}>Drag 'n' drop some files here, or click to select files</p>
                         }
                    </div>
